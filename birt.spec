@@ -1,7 +1,7 @@
 Summary:	BIRT - Batch Image Resizing Thing
 Name:		birt
 Version:	1.2.1
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPL
 Group:		Graphics
 
