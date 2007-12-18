@@ -51,14 +51,15 @@ install -d %buildroot%{_datadir}/icons/large
 install -m 644 %{name}_large.png %buildroot%{_datadir}/icons/large/%{name}.png
 
 # install menu entry
-install -d %buildroot/%_menudir
-cat <<EOF > %buildroot/%_menudir/%{name}
-?package(%{name}): needs=X11 \
-section="Multimedia/Graphics" \
-title="BIRT - Batch Image Resizing Thing" \
-longtitle="GUI tool for easy resizing series of images" \
-command="%{name}" \
-icon="%{name}.png"
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications/
+cat << EOF > %buildroot%{_datadir}/applications/mandriva-%{name}.desktop
+[Desktop Entry]
+Type=Application
+Categories=Graphics;Viewer;
+Name=BIRT - Batch Image Resizing Thing
+Comment=GUI tool for easy resizing series of images
+Exec=%{name}
+Icon=%{name}
 EOF
 
 %post
@@ -76,5 +77,5 @@ rm -rf %buildroot
 %_bindir/*
 %_iconsdir/*.png
 %_iconsdir/*/*.png
-%_menudir/%{name}
+%{_datadir}/applications/mandriva-%{name}.desktop
 %_datadir/%{name}
