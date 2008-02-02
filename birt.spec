@@ -1,15 +1,14 @@
 Summary:	BIRT - Batch Image Resizing Thing
 Name:		birt
 Version:	1.2.1
-Release:	%mkrel 2
-License:	GPL
+Release:	%mkrel 3
+License:	GPL+
 Group:		Graphics
-
 Source:		http://acherondevelopment.com/files/birt/%{name}-%{version}.tar.bz2
-
-Url:		http://acherondevelopment.com/project.php?name=birt
-BuildRoot:	%_tmppath/%name-%version-%release-root
-BuildRequires:	libqt-devel, ImageMagick
+URL:		http://acherondevelopment.com/project.php?name=birt
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	libqt-devel
+BuildRequires:	ImageMagick
 
 %description
 
@@ -22,61 +21,52 @@ photo album where each hi-res photo needs a low-res copy and a
 thumbnail.
 
 %prep
-
 %setup -q
 
 %build
-
-perl -p -i -e 's|(INSTALL_PATH\s*=\s*).*?$|$1/usr/share/birt|g' birt.pro
-perl -p -i -e 's|(target.extra\s*=\s*cp\s+\$\$TARGET\s+)\$\$INSTALL_PATH/|$1%{buildroot}%{_bindir}|g' birt.pro
+sed -i -e 's|(INSTALL_PATH\s*=\s*).*?$|$1/usr/share/birt|g' birt.pro
+sed -i -e 's|(target.extra\s*=\s*cp\s+\$\$TARGET\s+)\$\$INSTALL_PATH/|$1%{buildroot}%{_bindir}|g' birt.pro
 qmake
 %make
 
-# Generate menu icons in required format
-convert birticon.png -resize 32x32 %{name}.png
-convert birticon.png -resize 16x16 %{name}_mini.png
-convert birticon.png -resize 48x48 %{name}_large.png
-
 %install
-
-rm -rf %buildroot
+rm -rf %{buildroot}
 install -d %{buildroot}%{_bindir}
 %makeinstall INSTALL_ROOT=%{buildroot}
 
 # install menu icon
-install -d %buildroot%{_datadir}/icons
-install -m 644 %{name}.png %buildroot%{_datadir}/icons/
-install -d %buildroot%{_datadir}/icons/mini
-install -m 644 %{name}_mini.png %buildroot%{_datadir}/icons/mini/%{name}.png
-install -d %buildroot%{_datadir}/icons/large
-install -m 644 %{name}_large.png %buildroot%{_datadir}/icons/large/%{name}.png
+mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
+convert -scale 16x16 birticon.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+convert -scale 32x32 birticon.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+convert -scale 48x48 birticon.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
 
 # install menu entry
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications/
-cat << EOF > %buildroot%{_datadir}/applications/mandriva-%{name}.desktop
+mkdir -p %{buildroot}%{_datadir}/applications/
+cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop
 [Desktop Entry]
 Type=Application
-Categories=Graphics;Viewer;
+Categories=QT;Graphics;Viewer;
 Name=BIRT - Batch Image Resizing Thing
 Comment=GUI tool for easy resizing series of images
-Exec=%{name}
+Exec=%{_bindir}/%{name}
 Icon=%{name}
 EOF
 
 %post
-%update_menus
+%{update_menus}
+%{update_icon_cache hicolor}
 
 %postun
-%clean_menus
+%{clean_menus}
+%{clean_icon_cache hicolor}
 
 %clean
-rm -rf %buildroot
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
 %doc README LICENSE
-%_bindir/*
-%_iconsdir/*.png
-%_iconsdir/*/*.png
+%{_bindir}/*
 %{_datadir}/applications/mandriva-%{name}.desktop
-%_datadir/%{name}
+%{_iconsdir}/hicolor/*/apps/%{name}.png
+%{_datadir}/%{name}
