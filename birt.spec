@@ -11,7 +11,6 @@ BuildRequires:	libqt-devel
 BuildRequires:	ImageMagick
 
 %description
-
 BIRT, the Batch Image Resizing Thing, is a simple application that
 allows a large number of images to be resized in one go. Obviously
 this is possible by scripting ImageMagick but it's usually somewhat
