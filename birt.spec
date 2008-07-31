@@ -7,7 +7,7 @@ Group:		Graphics
 Source:		http://acherondevelopment.com/files/birt/%{name}-%{version}.tar.bz2
 URL:		http://acherondevelopment.com/project.php?name=birt
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:	libqt3-devel
+BuildRequires:	qt3-devel
 BuildRequires:	ImageMagick
 
 %description
