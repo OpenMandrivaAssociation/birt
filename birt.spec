@@ -1,13 +1,13 @@
 Summary:	BIRT - Batch Image Resizing Thing
 Name:		birt
-Version:	1.2.1
-Release:	%mkrel 4
+Version:	1.2.2
+Release:	%mkrel 1
 License:	GPL+
 Group:		Graphics
 Source:		http://acherondevelopment.com/files/birt/%{name}-%{version}.tar.bz2
 URL:		http://acherondevelopment.com/project.php?name=birt
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:	libqt-devel
+BuildRequires:	libqt3-devel
 BuildRequires:	ImageMagick
 
 %description
@@ -23,10 +23,10 @@ thumbnail.
 %setup -q
 
 %build
-sed -i -e 's|(INSTALL_PATH\s*=\s*).*?$|$1/usr/share/birt|g' birt.pro
-sed -i -e 's|(target.extra\s*=\s*cp\s+\$\$TARGET\s+)\$\$INSTALL_PATH/|$1%{buildroot}%{_bindir}|g' birt.pro
-qmake
-%make
+sed -i -e 's,/usr/local/birt,/usr/share/birt,g' birt.pro
+sed -i -e 's,$$INSTALL_PATH/,%{buildroot}%{_bindir},g' birt.pro
+%{qt3bin}/qmake QMAKE_CXXFLAGS="%{optflags}"
+make
 
 %install
 rm -rf %{buildroot}
@@ -44,7 +44,7 @@ mkdir -p %{buildroot}%{_datadir}/applications/
 cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop
 [Desktop Entry]
 Type=Application
-Categories=QT;Graphics;Viewer;
+Categories=Qt;Graphics;2DGraphics;Viewer;
 Name=BIRT - Batch Image Resizing Thing
 Comment=GUI tool for easy resizing series of images
 Exec=%{_bindir}/%{name}
@@ -68,7 +68,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc README LICENSE
+%doc README
 %{_bindir}/*
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_iconsdir}/hicolor/*/apps/%{name}.png
