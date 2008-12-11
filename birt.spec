@@ -8,7 +8,7 @@ Source:		http://acherondevelopment.com/files/birt/%{name}-%{version}.tar.bz2
 URL:		http://acherondevelopment.com/project.php?name=birt
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:	qt3-devel
-BuildRequires:	ImageMagick
+BuildRequires:	imagemagick
 
 %description
 BIRT, the Batch Image Resizing Thing, is a simple application that
