@@ -1,11 +1,11 @@
 Summary:	BIRT - Batch Image Resizing Thing
 Name:		birt
 Version:	1.2.2
-Release:	%mkrel 2
-License:	GPL+
+Release:	%mkrel 3
+License:	GPLv2+
 Group:		Graphics
-Source:		http://acherondevelopment.com/files/birt/%{name}-%{version}.tar.bz2
-URL:		http://acherondevelopment.com/project.php?name=birt
+Source:		http://vrai.net/files/software_projects/birt/%name-%{version}.tar.bz2
+URL:		http://vrai.net/project.php?project=birt
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:	qt3-devel
 BuildRequires:	imagemagick
