@@ -73,3 +73,54 @@ rm -rf %{buildroot}
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/%{name}
+
+
+%changelog
+* Sun Dec 05 2010 Oden Eriksson <oeriksson@mandriva.com> 1.2.2-4mdv2011.0
++ Revision: 610072
+- rebuild
+
+* Wed Mar 24 2010 Sandro Cazzaniga <kharec@mandriva.org> 1.2.2-3mdv2010.1
++ Revision: 527252
+- New url, source
+- fix license
+
+* Wed Sep 02 2009 Thierry Vignaud <tv@mandriva.org> 1.2.2-2mdv2010.0
++ Revision: 424625
+- rebuild
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - lowercase ImageMagick
+
+* Thu Jul 31 2008 Adam Williamson <awilliamson@mandriva.org> 1.2.2-1mdv2009.0
++ Revision: 258483
+- br qt3-devel, not libqt3-devel (for x86-64)
+- don't package LICENSE
+- simplify the sed commands (and make them work)
+- specifically buildrequre libqt3-devel and call qt3's qmake
+- new release 1.2.2 (fixes build)
+- rebuild for new era
+- fd.o icons
+- new license policy
+- spec clean
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+    - fix extra spacing at top of description
+    - auto-convert XDG menu entry
+    - kill re-definition of %%buildroot on Pixel's request
+    - use %%mkrel
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Marcelo Ricardo Leitner <mrl@mandriva.com>
+    - Import birt
+
+
+
+* Wed Dec  7 2005 Till Kamppeter <till@mandriva.com> 1.2.1-1mdk
+- initial release.
