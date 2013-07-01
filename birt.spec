@@ -1,4 +1,4 @@
-Summary:	BIRT - Batch Image Resizing Thing
+Summary:	- Batch Image Resizing Thing
 Name:		birt
 Version:	1.2.2
 Release:	%mkrel 4
