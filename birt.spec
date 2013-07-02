@@ -1,12 +1,11 @@
-Summary:	- Batch Image Resizing Thing
+Summary:	Batch Image Resizing Thing
 Name:		birt
 Version:	1.2.2
-Release:	%mkrel 4
+Release:	5
 License:	GPLv2+
 Group:		Graphics
 Source:		http://vrai.net/files/software_projects/birt/%name-%{version}.tar.bz2
 URL:		http://vrai.net/project.php?project=birt
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:	qt3-devel
 BuildRequires:	imagemagick
 
@@ -29,7 +28,6 @@ sed -i -e 's,$$INSTALL_PATH/,%{buildroot}%{_bindir},g' birt.pro
 make
 
 %install
-rm -rf %{buildroot}
 install -d %{buildroot}%{_bindir}
 %makeinstall INSTALL_ROOT=%{buildroot}
 
@@ -64,10 +62,8 @@ EOF
 %endif
 
 %clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc README
 %{_bindir}/*
 %{_datadir}/applications/mandriva-%{name}.desktop
