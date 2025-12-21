@@ -6,6 +6,7 @@ License:	GPLv2+
 Group:		Graphics
 Source:		http://vrai.net/files/software_projects/birt/%name-%{version}.tar.bz2
 URL:		https://vrai.net/project.php?project=birt
+BuildRequires:	make
 BuildRequires:	qt3-devel
 BuildRequires:	imagemagick
 
